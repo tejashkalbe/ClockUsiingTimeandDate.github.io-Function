@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
+    <title>Clock</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: rgb(7, 247, 7);
+        font-family: cursive;
+      }
+      .time {
+        font-size: 50px;
+        font-weight: 500;
+      }
+      .date {
+        font-size: 25px;
+        /* font-weight: 100; */
+      }
+      #th {
+        font-size: 18px;
+      }
+      #salute {
+        font-size: 90px;
+        font-family: "Playfair Display", serif;
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <span id="salute"></span>
+    <div class="time">
+      <span id="hr"></span> : <span id="min"></span> : <span id="sec"></span>
+      <span id="ampm"></span>
+    </div>
+    <div class="date">
+      <span id="day"></span>,&nbsp;&nbsp;<span id="date"></span
+      ><span><sup id="th"></sup></span>&nbsp;&nbsp;<span id="month"></span
+      >,&nbsp;&nbsp;
+      <span id="year"></span>
+    </div>
+    <script>
+      setInterval(() => {
+        var c = new Date();
+
+        var months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+
+        var days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+
+        document.getElementById("hr").innerHTML = c.getHours();
+        document.getElementById("min").innerHTML = c.getMinutes();
+        document.getElementById("sec").innerHTML = c.getSeconds();
+        document.getElementById("day").innerHTML = days[c.getDay()];
+        document.getElementById("date").innerHTML = c.getDate();
+        document.getElementById("month").innerHTML = months[c.getMonth()];
+        document.getElementById("year").innerHTML = c.getFullYear();
+
+        if (c.getHours() < 12) {
+          document.getElementById("ampm").innerHTML = "AM";
+        } else {
+          document.getElementById("ampm").innerHTML = "PM";
+        }
+
+        var a = c.getDate() % 10;
+        switch (a) {
+          case 1:
+            document.getElementById("th").innerHTML = "st";
+            break;
+          case 2:
+            document.getElementById("th").innerHTML = "nd";
+            break;
+          case 3:
+            document.getElementById("th").innerHTML = "rd";
+            break;
+          default:
+            document.getElementById("th").innerHTML = "th";
+        }
+
+        if (c.getHours() >= 6 && c.getHours() < 12) {
+          document.getElementById("salute").innerHTML = "Good Morning !";
+        } else if (c.getHours() >= 12 && c.getHours() < 16) {
+          document.getElementById("salute").innerHTML = "Good Afternoon !";
+        } else if (c.getHours() >= 16 && c.getHours() < 20) {
+          document.getElementById("salute").innerHTML = "Good Evening !";
+        } else {
+          document.getElementById("salute").innerHTML = "Good Night !";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
